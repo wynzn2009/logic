@@ -50,6 +50,7 @@ public class LoorProcessor implements PageProcessor {
 			page.addTargetRequests(page.getHtml().xpath("//div[@class='content']//div[@class='leftContent']/ul").links().regex(URL_POST).all());
 		}else{
 			page.putField("title", page.getHtml().xpath("//div[@class='title']/h1/html()"));
+			page.putField("total", page.getHtml().xpath("//div[@class='price']//span[@class='tital']/html()"));
 		}
 	}
 
