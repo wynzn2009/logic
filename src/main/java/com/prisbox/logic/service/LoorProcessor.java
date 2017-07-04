@@ -3,6 +3,11 @@
  */
 package com.prisbox.logic.service;
 
+import java.util.Map;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -55,6 +60,13 @@ public class LoorProcessor implements PageProcessor {
 			page.putField("communityName", page.getHtml().xpath("//div[@class='communityName']//a[@class='info']/html()"));
 			page.putField("unitPrice", page.getHtml().xpath("//div[@class='unitPrice']//span[@class='unitPriceValue']/html()"));
 //			page.putField("script", page.getHtml().xpath("//script").regex(SCRIPT));
+			String script = page.getHtml().xpath("//script").regex(SCRIPT).toString();
+			script = page.getHtml().xpath("//script").regex(SCRIPT).regex("init\\(\\{.*jpg\"\\}\\]").toString()+"}";
+			script = script.replaceFirst("init\\(", "");
+			JSONObject o = JSON.parseObject(script);
+			for(Map.Entry<String, Object> entry : o.entrySet()){
+				System.out.println(entry.getKey()+"--------------"+entry.getValue());
+			}
 		}
 	}
 
@@ -62,7 +74,6 @@ public class LoorProcessor implements PageProcessor {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Spider.create(new LoorProcessor())
 				.addUrl("https://bj.lianjia.com/ershoufang/pg23")
 				// 添加Pipeline
