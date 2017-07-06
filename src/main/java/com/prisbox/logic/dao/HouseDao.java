@@ -3,8 +3,11 @@
  */
 package com.prisbox.logic.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import com.prisbox.logic.model.House;
 
@@ -19,4 +22,7 @@ public interface HouseDao {
 			+ "#{storey},#{architecture},#{orientation},"
 			+ "#{decoration},#{household},#{heating},#{boardingTime},#{ownership},#{lastTrans},#{mortgage},#{longitude},#{dimension},#{unique})")
 	int add(House houseInfo);
+
+	@Select("select id from house")
+	List<String> houseidSet();
 }
