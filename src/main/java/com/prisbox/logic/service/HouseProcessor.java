@@ -160,6 +160,8 @@ public class HouseProcessor implements PageProcessor {
 			temp = page.getHtml().xpath("//div[@class='transaction']//div[@class='content']/ul/li[7]///span[2]/html()")
 					.toString();
 			house.setMortgage(temp);
+			
+			System.out.println(house);
 			dao.add(house);
 			// page.putField("total",
 			// page.getHtml().xpath("//div[@class='price']//span[@class='total']/html()"));
@@ -172,7 +174,7 @@ public class HouseProcessor implements PageProcessor {
 		} else {
 			if (flag) {
 				List<String> list = new ArrayList<String>(99);
-				for (int i = 2; i < /* 101 */3; i++) {
+				for (int i = 2; i < 101; i++) {
 					list.add(PREFIX + "/pg" + i);
 					System.out.println(list.get(i - 2));
 				}
